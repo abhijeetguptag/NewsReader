@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuCommunicate"
+        android:title="@string/all_favourite_articles">
+        <menu>
+            <item
+                android:id="@+id/itemFav"
+                android:icon="@drawable/ic_fav_selected"
+                android:title="@string/article"
+                android:checkable="false"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menuAllFav"
+        android:title="@string/my_fav">
+        <menu>
+            <item
+                android:id="@+id/itemShare"
+                android:icon="@drawable/baseline_share_24"
+                android:title="@string/share"
+                android:checkable="false"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
+</menu>
