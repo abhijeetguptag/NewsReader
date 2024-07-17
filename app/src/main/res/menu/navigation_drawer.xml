@@ -15,7 +15,7 @@
         </menu>
     </item>
     <item
-        android:id="@+id/menuAllFav"
+        android:id="@+id/menuShare"
         android:title="@string/my_fav">
         <menu>
             <item

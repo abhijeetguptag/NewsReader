@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/fav_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_yellow_20"
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".view.fragment.NewsFragment">
+    tools:context=".view.fragment.FavouriteNewsFragment">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"

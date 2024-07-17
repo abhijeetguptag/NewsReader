@@ -29,6 +29,10 @@ class NewsViewModel @Inject constructor(
     val favArticlesData: LiveData<NetworkResponse<List<Article>>>
         get() = favArticles
 
+    private val favArticlesCount : MutableLiveData<NetworkResponse<Int>> = MutableLiveData()
+    val favArticlesCountData : LiveData<NetworkResponse<Int>>
+        get() = favArticlesCount
+
     fun getNewsHeadLines(
         context: Context? = null,
         country: String = DeviceUtils.getLocaleCountryName(),
@@ -62,5 +66,10 @@ class NewsViewModel @Inject constructor(
 
         val apiResult = getNewsHeadlinesUseCase.getFavNews()
         favArticles.postValue(apiResult)
+    }
+
+    fun getFavArticlesCount() = viewModelScope.launch(Dispatchers.IO){
+       val favsCount = getNewsHeadlinesUseCase.getFavCount()
+        favArticlesCount.postValue(NetworkResponse.Success(favsCount))
     }
 }

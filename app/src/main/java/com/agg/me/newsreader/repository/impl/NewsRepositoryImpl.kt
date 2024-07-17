@@ -1,5 +1,6 @@
 package com.agg.me.newsreader.repository.impl
 
+import android.util.Log
 import com.agg.me.newsreader.data.datasource.local.NewsDao
 import com.agg.me.newsreader.data.datasource.remote.NewsRemoteDataSource
 import com.agg.me.newsreader.data.model.Article
@@ -34,6 +35,7 @@ class NewsRepositoryImpl @Inject constructor (
 
     override suspend fun addArticleToDB(article : Article): Boolean {
         val articleTitles: List<String>
+        Log.d("NEWS Repo", "Article for addition $article")
         withContext(Dispatchers.IO) {
             articleTitles = database.getArticleTitles()
         }
@@ -47,6 +49,8 @@ class NewsRepositoryImpl @Inject constructor (
 
     override suspend fun deleteArticleFromDB(article: Article) {
         val articleTitles: List<String>
+        Log.d("NEWS Repo", "Article for deletion $article")
+
         withContext(Dispatchers.IO) {
              articleTitles = database.getArticleTitles()
         }
@@ -57,5 +61,9 @@ class NewsRepositoryImpl @Inject constructor (
 
     override suspend fun getFavArticles(): NetworkResponse<List<Article>> {
       return  NetworkResponse.Success(database.getFavArticles())
+    }
+
+    override suspend fun getFavArticlesCount(): Int {
+        return database.getFavArticlesCount()
     }
 }

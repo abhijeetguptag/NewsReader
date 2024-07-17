@@ -15,4 +15,7 @@
     <string name="my_fav">My Favourite Article(s)</string>
     <string name="article">Article</string>
     <string name="all_favourite_articles">All Favourite Articles</string>
+    <string name="try_later">Unable to fetch records. Please try later</string>
+    <string name="daily_news">Daily News</string>
+    <string name="welcome">Welcome!</string>
 </resources>

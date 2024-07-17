@@ -23,4 +23,8 @@ class GetNewsHeadlinesUseCase @Inject constructor(private val newsRepository: Ne
     suspend fun getFavNews(): NetworkResponse<List<Article>>{
        return newsRepository.getFavArticles()
     }
+
+    suspend fun getFavCount(): Int{
+        return newsRepository.getFavArticlesCount()
+    }
 }

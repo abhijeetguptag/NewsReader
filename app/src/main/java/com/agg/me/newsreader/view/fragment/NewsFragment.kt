@@ -12,12 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.agg.me.newsreader.R
+import com.agg.me.newsreader.data.model.Article
 import com.agg.me.newsreader.data.model.News
 import com.agg.me.newsreader.data.util.NetworkResponse
 import com.agg.me.newsreader.databinding.FragmentNewsBinding
 import com.agg.me.newsreader.util.DeviceUtils
 import com.agg.me.newsreader.util.NewsCategory
 import com.agg.me.newsreader.view.adapter.NewsAdapter
+import com.agg.me.newsreader.view.adapter.OnFavButtonClickListener
 import com.agg.me.newsreader.view.viewmodel.NewsViewModel
 import com.agg.me.newsreader.view.viewmodel.NewsViewModelFactory
 import com.google.android.material.card.MaterialCardView
@@ -37,8 +39,7 @@ class NewsFragment : Fragment() {
     @Inject
     lateinit var factory: NewsViewModelFactory
 
-    @Inject
-    lateinit var newsAdapter: NewsAdapter
+    private var newsAdapter: NewsAdapter? = null
 
     private var page = 1
     private var totalResults = 0
@@ -48,6 +49,17 @@ class NewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        newsAdapter = NewsAdapter( object:OnFavButtonClickListener{
+            override fun onFavButtonClicked(isFav: Boolean, article: Article) {
+            if(isFav){
+                viewModel.saveArticle(article)
+            }
+                else {
+                viewModel.unSaveArticle(article)
+            }
+            }
+
+        } )
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -79,7 +91,7 @@ class NewsFragment : Fragment() {
         when (resource) {
             is NetworkResponse.Success -> {
                 resource.data?.let {
-                    newsAdapter.differ.submitList(it.articles?.toList())
+                    newsAdapter?.differ?.submitList(it.articles?.toList())
                     totalResults = it.totalResults
                     showLoadingAnimation()
                     Log.i(TAG, it.status)
@@ -109,7 +121,7 @@ class NewsFragment : Fragment() {
     private val scrollListener = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
-            if (position == (newsAdapter.itemCount - 1)) {
+            if (position == (newsAdapter?.itemCount!! - 1)) {
                 page += 1
                 if (page == (totalResults / 20) + 2) page =
                     1 // If max page ((totalResults / 20) + 1) + 1 make return first
@@ -196,4 +208,5 @@ class NewsFragment : Fragment() {
     companion object {
         private val TAG = NewsFragment::class.simpleName.toString()
     }
+
 }

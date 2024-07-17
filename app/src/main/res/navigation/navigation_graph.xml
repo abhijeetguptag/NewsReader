@@ -11,4 +11,10 @@
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
 
+    <fragment
+        android:id="@+id/itemFav"
+        android:name="com.agg.me.newsreader.view.fragment.FavouriteNewsFragment"
+        android:label="Favourite News"
+        tools:layout="@layout/fragment_fav_news" />
+
 </navigation>

@@ -39,10 +39,7 @@ object NetworkStatus {
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
             val activeNetworkInfo = connectivityManager.activeNetworkInfo
-            if (activeNetworkInfo != null && activeNetworkInfo.isConnected) {
-                return true
-            }
-        return false
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
 
     }
 }

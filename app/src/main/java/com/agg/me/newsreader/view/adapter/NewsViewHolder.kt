@@ -1,6 +1,7 @@
 package com.agg.me.newsreader.view.adapter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import android.webkit.WebViewClient
 import android.widget.ImageView
@@ -12,7 +13,8 @@ import com.agg.me.newsreader.databinding.ItemNewsBinding
 import com.bumptech.glide.Glide
 
 class NewsViewHolder(
-    private val binding: ItemNewsBinding
+    private val binding: ItemNewsBinding,
+    private val onFavButtonClickListener: OnFavButtonClickListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private val circularProgressDrawable = CircularProgressDrawable(binding.root.context)
@@ -41,10 +43,14 @@ class NewsViewHolder(
                 if(article.isFav) {
                     favViewThumbnail.setImageResource(R.drawable.ic_fav_unselected)
                     article.isFav = false
+                    Log.d("Adapter ", "Article for deletion $article")
+                    onFavButtonClickListener.onFavButtonClicked(false , article)
                 }
                 else{
+                    Log.d("Adapter ", "Article for addition $article")
                     favViewThumbnail.setImageResource(R.drawable.ic_fav_selected)
-                    article.isFav = false
+                    article.isFav = true
+                    onFavButtonClickListener.onFavButtonClicked(true , article)
                 }
             }
             textTitle.text = article.articleTitle

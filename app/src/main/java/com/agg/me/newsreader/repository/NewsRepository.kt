@@ -17,4 +17,6 @@ interface NewsRepository {
     suspend fun deleteArticleFromDB(article: Article)
 
     suspend fun getFavArticles(): NetworkResponse<List<Article>>
+
+    suspend fun getFavArticlesCount(): Int
 }

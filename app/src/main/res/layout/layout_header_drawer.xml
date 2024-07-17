@@ -13,7 +13,7 @@
         android:layout_marginEnd="24dp"
         android:textAppearance="?attr/textAppearanceHeadlineSmall"
         android:textColor="?attr/colorOnSurface"
-        android:text="Welcome!"
+        android:text="@string/welcome"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -24,7 +24,7 @@
         android:layout_marginEnd="24dp"
         android:textAppearance="?attr/textAppearanceTitleSmall"
         android:textColor="?attr/colorOnSurfaceVariant"
-        android:text="Daily Special News"
+        android:text="@string/daily_news"
        />
 
 </LinearLayout>

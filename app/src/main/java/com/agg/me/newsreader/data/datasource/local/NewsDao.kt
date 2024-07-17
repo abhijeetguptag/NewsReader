@@ -23,4 +23,7 @@ interface NewsDao {
 
     @Delete
     suspend fun deleteArticle(article: Article)
+
+    @Query("Select count(*) from articleTable")
+    fun getFavArticlesCount() : Int
 }

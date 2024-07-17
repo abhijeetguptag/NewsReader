@@ -12,8 +12,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "articleTable")
 data class Article(
-    @PrimaryKey(autoGenerate = false)
-    val articleUUID: String = UUID.randomUUID().toString(),
+    @PrimaryKey(autoGenerate = true)
+    val articleUUID: Int ,
     @SerializedName("author")
     val articleAuthor: String?,
     @SerializedName("content")

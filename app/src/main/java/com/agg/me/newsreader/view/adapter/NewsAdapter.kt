@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.agg.me.newsreader.data.model.Article
 import com.agg.me.newsreader.databinding.ItemNewsBinding
 
-class NewsAdapter : RecyclerView.Adapter<NewsViewHolder>() {
-
+class NewsAdapter(private val onFavButtonClickListener: OnFavButtonClickListener) : RecyclerView.Adapter<NewsViewHolder>() {
     private val callback = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem.articleUUID == newItem.articleUUID
@@ -24,7 +23,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val binding = ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return NewsViewHolder(binding)
+        return NewsViewHolder(binding,onFavButtonClickListener)
     }
 
     override fun getItemCount(): Int {
