@@ -16,7 +16,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.agg.me.newsreader.R
 import com.agg.me.newsreader.data.util.NetworkResponse
@@ -65,7 +64,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navView: NavigationView = findViewById(R.id.navigationDrawer)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-         navController = navHostFragment.navController
+        navController = navHostFragment.navController
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -73,7 +72,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.fav_main
             ), drawerLayout
         )
-//        setupActionBarWithNavController(navController!!, appBarConfiguration!!) //the most important part
         navView.setupWithNavController(navController!!) //the second most important part
 
     }
@@ -83,22 +81,25 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel.getFavArticlesCount()
         viewModel.favArticlesCountData.observe(this, ::setData)
     }
+
     private fun setData(resource: NetworkResponse<Int>?) {
         when (resource) {
             is NetworkResponse.Success -> {
                 resource.data?.let {
-                mOptionsMenu?.getItem(0)?.setTitle(getString(R.string.article)+ it.toString())
+                    mOptionsMenu?.getItem(0)?.setTitle(getString(R.string.article) + it.toString())
                 }
             }
 
             else -> Log.d("HomeActivity", "Resource not found!")
         }
     }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.itemShare -> {
                 Toast.makeText(this, getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
             }
+
             R.id.itemFav -> {
                 Toast.makeText(this, "Hurray !!!!!", Toast.LENGTH_SHORT).show()
             }
